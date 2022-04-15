@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
@@ -96,12 +95,8 @@ WSGI_APPLICATION = 'blogger.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd9qnpunk8li6kp',
-        'USER': 'lsrxnakisenqmj',
-        'PASSWORD': '9fd7afc3ce56fd3aa24915fae41f0b02fad9bae2a4eddb97d77f17dad5f7447d',
-        'HOST': 'ec2-34-197-84-74.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -186,5 +181,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER = 'shrenik@sundayink.in'
 EMAIL_HOST_PASSWORD = 'Mahavir1234'
-
-django_heroku.settings(locals())
