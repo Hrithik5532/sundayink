@@ -10,7 +10,7 @@ from taggit.managers import TaggableManager
 # Create your models here.
 #category
 class IpModel(models.Model):
-    ip = models.CharField(max_length=100)
+    ip = models.CharField(max_length=100,blank=True,null=True)
     def __str__(self):
         return self.ip
 
