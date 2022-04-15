@@ -1,0 +1,211 @@
+{% extends 'base.html' %} {% block title%}Admin || Data{% endblock title%} {% block content%}
+
+
+
+<!-- Style Attribe to the same page : Table Section -->
+<style>
+    .data-icon {
+        font-size: 20px !important;
+        padding: 0 10px;
+        color: black;
+    }
+
+    .data-icon:hover {
+        font-size: 20px !important;
+        padding: 0 10px;
+        color: red;
+    }
+
+    .check-data {
+        text-align: center;
+    }
+
+    .same-margin-container {
+        margin: 0 auto 40px;
+    }
+
+    @media (max-width:772px) {
+        table {
+            width: 100%;
+        }
+    }
+</style>
+<body>
+
+    <div class="container same-margin-container">
+        <h1 class="oleez-page-title wow fadeInUp">Submitted Data</h1>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Mail ID</th>
+                            <th scope="col">Number</th>
+                            <th scope="col">Subscribe</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Register</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in users %}
+                        <tr>
+                            <td>{{i.first_name}} {{i.last_name}}
+
+                            </td>
+                            <td>
+                                {{i.email}}
+                            </td>
+                            <td>
+                            </td>
+                          
+                            <td class="check-data">
+                                {% for sub in subsc %}
+                                    {% if i.email == sub.email %}
+                                    <i class="data-icon bi bi-check"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="check-data">
+                            {% for con in contavt_detail  %}
+                                {% if i.email == con.email %}
+                                
+                    
+                                <i class="data-icon bi bi-x"></i>
+                                {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="check-data">
+                                <i class="data-icon bi bi-check"></i>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% for i in contavt_detail %}
+                        <tr>
+                            <td>{{i.name}}
+
+                            </td>
+                            <td>
+                                {{i.email}}
+                            </td>
+                            <td>
+                                {{i.phone}}
+                            </td>
+                        
+                            <td class="check-data">
+                                {% for sub in subsc %}
+                                    {% if i.email == sub.email %}
+                                    <i class="data-icon bi bi-check"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                                <td class="check-data">
+                                    <i class="data-icon bi bi-check"></i>
+                                </td>
+                                
+                            <td class="check-data">
+                                {% for j in users %}
+                                {% if i.email == j.email %}
+                                <i class="data-icon bi bi-check"></i>
+                                {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        {% for i in subsc %}
+                        <tr>
+                            <td>{{i.name}}
+
+                            </td>
+                            <td>
+                                {{i.email}}
+                            </td>
+                            <td>
+                                {{i.phone}}
+                            </td>
+                           
+                            <td class="check-data">
+                                <i class="data-icon bi bi-check"></i>
+                            </td>
+                            <td class="check-data">
+                                {% for con in  contavt_detail %}
+                                    {% if i.email == con.email %}
+                                    <i class="data-icon bi bi-check"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                                
+                            <td class="check-data">
+                                {% for j in users %}
+                                {% if i.email == j.email %}
+                                <i class="data-icon bi bi-check"></i>
+                                {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<footer class="page-footer font-small special-color-dark pt-4">
+
+    <div class="container">
+
+        <div class="row footer-content-2">
+            <div class="col-md-8 align-items-center">
+
+                <div class="footer-widget-text">
+
+                    <ul class="footer-navigatoin">
+                        <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'about'%}">About</a></li>
+                        <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'blogs' %}">Blogs</a></li>
+                        <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'f&q'%}">FAQs</a>
+                        </li>
+                        <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'contact'%}">Contact</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'logout'%}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'register'%}">Register</a>
+                        </li>
+                        <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'login'%}">Login</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 search-footer-center">
+                <form class="form-inline flex-search" action="{% url 'search' %}">
+                    <input class="form-control form-control-sm mr-3 w-75 footer-search" type="text" id="search" name="search" placeholder="Search" aria-label="Search">
+                    <button class="btn footer-icon" type="submit"> <i class="bi bi-search footer-icon " aria-hidden="true "></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-text ">
+            <p class="mb-md-0 ">© Copyright And Privacy Policy Reserved by <a class="footer-link-sernik-2" href="">SundayInk</a> <span id="monthYear" class="">March 2022</span>,
+                <span class="below-small"> website designed by <a href="https://www.himanicc.com " target="_blank " rel="noopener noreferrer " class="footer-link-sernik" style="color: white; font-weight:600; ">www.himanicc.com</a></span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+</body>
+
+{% endblock content%}

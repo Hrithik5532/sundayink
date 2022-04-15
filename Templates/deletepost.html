@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title%}
+Admin | Delete Post{% endblock title%}
+
+{% block content%}
+
+
+        <!-- END section -->
+<body>
+
+<!-- .site-wrap -->
+{% if user.is_authenticated %}
+<div class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 single-content">
+                <h3>Delete: {{post.title}}</h3>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token%}
+                    <strong>Are you sure ??</strong><br>
+                    <button class="defaul-btn-admin" style="display: flex;padding: 9px;margin: 22px auto;">  Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class=" text-center" style="text-algin:center;">
+
+        <p style="display: flex;padding: 9px;margin: 22px auto; font-size:30px; "> User Access Not Allow</p>
+    </div>
+{% endif %}
+
+
+</body>
+  {% endblock content%}
