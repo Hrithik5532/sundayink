@@ -1,0 +1,674 @@
+{% extends 'base.html' %} {% block title %} SundayInk || {{b.title}}{% endblock title %} {% block content %} {% load social_share %} {% load humanize%}
+
+<link rel="stylesheet" href="">
+
+<style>
+    .share-button {
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    .share-icons {
+        list-style: none;
+        margin: 0px 6px;
+    }
+
+    .share-icons i {
+        color: white!important;
+    }
+
+    .btn-share {
+        padding: 5px 0!important;
+        width: 50px;
+        height: 50px;
+        border-radius: 0!important;
+    }
+
+    .btn-share i {
+        font-size: 28px;
+        padding: 5px 5px 2px 5px;
+        border-radius: 100%;
+    }
+
+    .twitter-i {
+        background-color: #00acee;
+        color: white!important;
+    }
+
+    .twitter-i .bi-twitter {
+        /* padding: 0 4px; */
+        color: white;
+    }
+
+    .twitter-i .bi-twitter:hover {
+        /* padding: 0 4px; */
+        color: white;
+    }
+
+    .twitter-i:hover {
+        background-color: #4090d6!important;
+        align-items: center;
+        justify-content: center;
+        display: flex!important;
+    }
+
+    .linkedin-i:hover {
+        background-color: #006097!important;
+        align-items: center;
+        justify-content: center;
+        display: flex!important;
+    }
+
+    .facebook-i {
+        background-color: #4267B2;
+        color: white!important;
+    }
+
+    .facebook-i .bi-facebook {
+        /* padding: 0 4px; */
+        color: white;
+    }
+
+    .facebook-i .bi-facebook:hover {
+        /* padding: 0 4px; */
+        color: white;
+    }
+
+    .facebook-i:hover {
+        background-color: #0d63c4!important;
+        align-items: center;
+        justify-content: center;
+        display: flex!important;
+    }
+
+    .whatsapp-i {
+        background-color: #43aa43!important;
+        color: white!important;
+    }
+
+    .share-i {
+        background-color: #575757!important;
+        color: white!important;
+    }
+
+    .whatsapp-i .bi-whatsapp {
+        /* padding: 0 4px; */
+        color: white;
+        text-decoration: none;
+    }
+
+    .whatsapp-i .bi-whatsapp:hover {
+        /* padding: 0 4px; */
+        color: white;
+        text-decoration: none;
+    }
+
+    .whatsapp-i:hover {
+        background-color: green!important;
+        align-items: center;
+        justify-content: center;
+        display: flex!important;
+    }
+
+    .email-i {
+        background-color: #DB4437!important;
+        color: white!important;
+        text-decoration: none;
+    }
+
+    .email-i .bi-envelop {
+        /* padding: 0 4px; */
+        color: white;
+        text-decoration: none;
+        color: white;
+    }
+
+    .email-i .bi-envelop:hover {
+        /* padding: 0 4px; */
+        color: white;
+        text-decoration: none;
+        color: white;
+    }
+
+    .email-i:hover {
+        background-color: red !important;
+        align-items: center;
+        justify-content: center;
+        display: flex!important;
+    }
+
+    .share-word {
+        font-size: 11px!important;
+        padding: 0 8px 0 0px;
+    }
+
+    .commenter-name a {
+        color: black;
+        font-size: 15px;
+        text-decoration: none;
+    }
+
+    .comments p.comment-txt {
+        font-size: 15px;
+        border-bottom: 1px solid #ddd;
+        padding: 0!important;
+        margin: 0!important;
+    }
+
+    .comments .comment-box {
+        width: 100%;
+        float: left;
+        height: 100%;
+        background-color: #ffffff;
+        padding: 0px 0px 5px 5px!important;
+        border-left: 1px solid #ddd;
+        margin: 0px;
+    }
+
+    .blog-post-single .blog-post-wrapper .post-navigation {
+        margin-bottom: 17px !important;
+    }
+
+    @media (max-width:552px) {
+        .navigation-link {
+            font-size: 12px!important;
+        }
+        .btn-share i {
+            font-size: 20px;
+            padding: 5px 3px 2px 3px;
+            border-radius: 100%;
+        }
+        .btn-share {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+            height: 35px;
+            width: 35px;
+            padding: 0!important;
+        }
+    }
+
+    @media(min-width:768px) {
+        .blog-post-wrapper {
+            max-width: 100.66667% !important;
+        }
+ 
+
+    }
+
+    .side-visits {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(102, 102, 102, 0.06)!important;
+        position: fixed;
+        top: 30%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        right: 20px;
+        padding: 10px;
+        -webkit-border-radius: 10px!important;
+        -moz-border-radius: 10px!important;
+        border-radius: 10px!important;
+        z-index: 999!important;
+        color: black!important;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+
+
+    <main class="blog-post-single">
+
+
+        <div class="go-back">
+            {% if preview %}
+            <a class="back-a" href="{% url 'blog-settings' %}"> <img style="width: 25px;" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-back-text-editor-flat-icons-inmotus-design.png" /> Admin Panel </a>
+            {% else %}
+            <a class="back-a" href="{% url 'blogs' %}"> <img style="width: 25px;" src="https://img.icons8.com/external-flat-icons-inmotus-design/67/000000/external-back-text-editor-flat-icons-inmotus-design.png" /> Blogs </a>
+
+            {% endif %}
+
+
+        </div>
+        <div class="container">
+            <div class="row blog-center">
+
+                <div class="col-md-10 blog-post-wrapper">
+                    <div class="blog-body" style="    width: inherit !important;">
+                        <h1 class="post-title head-2 wow fadeInUp">{{b.title}}</h1>
+                        <div class="post-header wow fadeInUp">
+                            <div class="writer-info row">
+                                <div class="writer-division col-md-6" style='display:flex;'>
+                                    <p class="writer-name sub-text"> <b>Author :</b>
+                                        <a class="Writer-Fetch sub-text" href="https://www.linkedin.com/in/ca-shrenik-shah/">{{b.writer_name}}</a>
+                                    </p>
+                                    {% if b.co_author %}
+                                    <p class="writer-name sub-text" style='padding: 0px 10px;'> <b>Co-Author :</b>
+                                        <a class="Writer-Fetch sub-text">{{b.co_author}}</a>
+                                    </p>
+                                    {% endif %}
+                                    <!--<p class="writer-name sub-text"> <b>Co-Author :</b>-->
+
+                                    <!--        <a class="Writer-Fetch sub-text" href="">{{b.writer_name}}</a></p>-->
+                                </div>
+                                <div class="post-date-division col-md-6">
+                                    <span class="post-date sub-text" style="color: #b91616;">{{b.post_date}}</span>
+                                </div>
+                            </div>
+                            <img src="/media/{{b.thumbnail}}" alt="blog post" class="post-featured-image">
+
+                        </div>
+                        <div class="post-content wow fadeInUp sub-text">
+                            {{b.content | safe}}
+                        </div>
+                        <hr>
+                        <div class="social-shring">
+
+                            <ul class="share-button">
+
+                                <li class="share-icons">
+                                    <button class="btn btn-share twitter-i">{% post_to_twitter b.title b "<i class='bi bi-twitter'></i>" %}</button>
+                                </li>
+                                <li class="share-icons"><button class="btn btn-share linkedin-i" style="background:#0073b1!important;"><a href="http://www.linkedin.com/shareArticle?url={{request.get_host}}{{ request.get_full_path }}" target="_blank"><i class="bi bi-linkedin"></i></a></button>                                    </li>
+                                <li class="share-icons"><button class="btn btn-share facebook-i">{% post_to_facebook  b.get_absolute_url "<i class='bi bi-facebook'></i>" %}</button>
+                                </li>
+                                <li class="share-icons"><button class="btn btn-share email-i">{% send_email b.title "New Song: {{b.title}}. Check it out!" b "<i class='bi bi-envelope'></i>" %}</button>
+                                </li>
+                                <li class="share-icons"><button class="btn btn-share whatsapp-i">{% post_to_whatsapp b "<i class='bi bi-whatsapp'></i>" %}</button>
+                                </li>
+                                <li class="share-icons"><button class="btn btn-share share-i clipboard"><i class='bi bi-link'></i></button>
+
+                                </li>
+                                <p class="copied"></p>
+                            </ul>
+                        </div>
+                        <script>
+                            var $temp = $("<input>");
+                            var $url = $(location).attr('href');
+
+                            $('.clipboard').on('click', function() {
+                                $("body").append($temp);
+                                $temp.val($url).select();
+                                document.execCommand("copy");
+                                $temp.remove();
+                                $(".copied").text("URL copied!");
+                            })
+
+
+                            $(function() {
+                                $('[data-toggle="tooltip"]').tooltip()
+                            })
+                        </script>
+                        <style>
+                            .tag-blog-single {
+                                display: flex;
+                                flex-wrap: wrap;
+                            }
+
+                            .next-prev-btn {
+                                display: flex;
+                            }
+
+                            .nex {
+                                text-align: end;
+                                width: 50%;
+                                margin: 2%;
+                            }
+                        </style>
+
+
+                        <hr>
+                        <div class="sub-text">
+                            <div class="post-tags wow fadeInUp">
+                                <p class="tag-on-blog" style="font-size:15px !important">Tags :</p>
+                                <div class="tag-blog-single">
+                                    {% for tag in b.tags.all %}<a href="{% url 'tagged' tag.slug %}" class="tag-btn">#{{tag}}</a>{% endfor %}
+                                </div>
+                            </div>
+
+                            <div style="display:flex;    width: 100%; margin-bottom: 1px;">
+
+
+                                {% if prev %}
+                                <div class='next-prev-btn' style="margin: 1%; width:50%;">
+
+                                    <a class="previous" href="{% url 'blog' prev.post_id%}">
+                                        < Previous</a>
+                                </div>
+
+
+                                {% else %}
+
+                                <div class="nex">
+                                    <a class=""></a>
+                                </div>
+                                {% endif %} {% if next %}
+
+
+                                <div class="nex">
+                                    <a class="next-right" href="{% url 'blog' next.post_id%}">Next ></a>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <hr>
+
+
+
+
+
+
+
+                            <div class="post-navigation wow fadeInUp">
+
+                                {% comment %} like button {% endcomment %}
+                                <form action="/like/{{b.post_id}}" method="POST">
+                                    {% csrf_token %} {% if liked %}
+                                    <button type="submit" class="btn unlike-btn" value="{{b.post_id}}" name="post_id"><i class="bi bi-hand-thumbs-up-fill"></i>
+                                        UnLike
+                                        <a>{{no_likes}}</a>
+                                    </button> {% else %}
+                                    <button type="submit" class="btn like-btn" value="{{b.post_id}}" name="post_id"><i
+                                        class="bi bi-hand-thumbs-up-fill"></i>
+                                        Like
+                                        <a>{{no_likes}}</a>
+                                    </button> {% endif %}
+                                </form>
+
+
+
+                                {% comment %} comment section {% endcomment %}
+                                <a class="btn next-post" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"> <span class="comment-number">{{comments.count}}</span> Read Comments
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- Tags and like will show up here -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- Comment Dropdown Section -->
+                    <div class="container collapse" id="collapseExample">
+                        <div class="row">
+                            <div class="col-12" style="margin-bottom:40px">
+                                <div class="comments">
+                                    <div class="comment-box add-comment sub-text">
+                                        {% if user.is_authenticated %}
+                                        <span class="commenter-pic">
+                                            <img src="/media/images/users.png" class="img-fluid ">
+                                        </span>
+                                        <span class="commenter-name">
+                                            <form action="{% url 'add_comment' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="text" placeholder="Add a public comment" name="content">
+                                                <input type="hidden" name='id' value="{{b.post_id}}">
+                                                <button type="submit" class="btn default-button">Comment</button>
+                                            </form>
+                                            <button type="cancel" class="btn Cancel-btn">Cancel</button>
+                                        </span> {% else %}
+                                        <button class="login-comment-btn "><a href="{% url 'login'%}"
+                                                class="login-comment-btn "><i class="bi bi-lock"></i>Login to comment
+                                                :</a></button><br> {% endif %}
+                                    </div>
+                                    {% comment %} _____________________---------------------------______________________ {% endcomment %} {% for comment in comments %}
+                                    <div class="comment-box sub-text">
+                                        <span class="commenter-pic">
+                                            <img src="/media/images/users.png" class="img-fluid ">
+                                        </span>
+                                        <span class="commenter-name">
+                                            <a>{{comment.user}}</a> <span class="comment-time">{{comment.timestamp | naturaltime}}
+                                                </span>
+                                        </span>
+                                        <p class="comment-txt more">{{comment.content}}</p>
+                                        {% comment %}
+                                        <div class="comment-meta">
+
+                                            <button class="comment-reply reply-popup"><i class="fa fa-reply-all"
+                                                    aria-hidden="true"></i> Reply</button>
+                                        </div>
+                                        <div class="comment-box add-comment reply-box">
+                                            <span class="commenter-pic">
+                                                <img src="/assets/images/Icons/user1.png" class="img-fluid ">
+                                            </span>
+                                            <span class="commenter-name">
+                                                {% if user.is_authenticated %}
+                                                <form action="{% url 'replaycomment' %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="text" placeholder="Add a public comment" name="content">
+                                                    <input type="hidden" name='commentid' value="{{b.post_id}}">
+
+                                                    <input type="hidden" name=';postid' value="{{b.post_id}}">
+                                                    <button type="submit" class="btn default-button">Comment</button>
+                                                    <button type="cancel" class="btn Cancel-btn">Cancel</button>
+                                                </form>
+                                                {% else %}
+                                                <button class="btn default-button"><a href="{% url 'login'%}"
+                                                    class="default-button"><i class="bi bi-lock"></i>Login to comment
+                                                    :</a></button><br>
+                                                    {% endif %}
+                                            </span>
+                                        </div> {% endcomment %}
+                                    </div>
+                                    {% endfor %} {% comment %}____________________________--------------------------______________________ {% endcomment %} {% comment %}
+                                    <div class="comment-box">
+                                        <span class="commenter-pic">
+                                            <img src="/assets/images/Icons/user1.png" class="img-fluid ">
+                                        </span>
+                                        <span class="commenter-name">
+                                            <a href="#">Ashwin Sevak</a> <span class="comment-time">2 hours
+                                                ago</span>
+                                        </span>
+                                        <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
+                                        <div class="comment-meta">
+                                            <button class="comment-like"><i class="fa fa-thumbs-o-up"
+                                                    aria-hidden="true"></i> 99</button>
+                                            <button class="comment-dislike"><i class="fa fa-thumbs-o-down"
+                                                    aria-hidden="true"></i> 149</button>
+                                            <button class="comment-reply"><i class="fa fa-reply-all"
+                                                    aria-hidden="true"></i> Reply</button>
+                                        </div>
+                                        <div class="comment-box replied">
+                                            <span class="commenter-pic">
+                                                <img src="/assets/images/Icons/user1.png" class="img-fluid ">
+                                            </span>
+                                            <span class="commenter-name">
+                                                <a href="#">Ashwin Sevak</a> <span class="comment-time">2 hours
+                                                    ago</span>
+                                            </span>
+                                            <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
+                                            <div class="comment-meta">
+                                                <button class="comment-like"><i class="fa fa-thumbs-o-up"
+                                                        aria-hidden="true"></i> 99</button>
+                                                <button class="comment-dislike"><i class="fa fa-thumbs-o-down"
+                                                        aria-hidden="true"></i> 149</button>
+                                                <button class="comment-reply"><i class="fa fa-reply-all"
+                                                        aria-hidden="true"></i> Reply</button>
+                                            </div>
+                                            <div class="comment-box replied">
+                                                <span class="commenter-pic">
+                                                    <img src="/assets/images/Icons/user1.png"
+                                                        class="img-fluid comment-avtar">
+                                                </span>
+                                                <span class="commenter-name">
+                                                    <a href="#">Ashwin Sevak</a> <span class="comment-time">2 hours
+                                                        ago</span>
+                                                </span>
+                                                <p class="comment-txt more">Suspendisse massa enim, condimentum sit amet maximus quis, pulvinar sit amet ante. Fusce eleifend dui mi, blandit vehicula orci iaculis ac.</p>
+                                                <div class="comment-meta">
+                                                    <button class="comment-like"><i class="fa fa-thumbs-o-up"
+                                                            aria-hidden="true"></i> 99</button>
+                                                    <button class="comment-dislike"><i class="fa fa-thumbs-o-down"
+                                                            aria-hidden="true"></i> 149</button>
+                                                    <button class="comment-reply"><i class="fa fa-reply-all"
+                                                            aria-hidden="true"></i> Reply</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> {% endcomment %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        // Reply box popup JS
+                        $(document).ready(function() {
+                            $(".reply-popup").click(function() {
+                                $(".reply-box").toggle();
+                            });
+                        });
+                    </script>
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Footer Place Ananonmasly -->
+
+
+    <footer class="page-footer font-small special-color-dark pt-4">
+
+        <div class="container">
+
+            <div class="row footer-content-2">
+                <div class="col-md-8 align-items-center">
+
+                    <div class="footer-widget-text">
+
+                        <ul class="footer-navigatoin">
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'about'%}">About</a></li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'blogs' %}">Blogs</a></li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'f&q'%}">FAQs</a>
+                            </li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'contact'%}">Contact</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'logout'%}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'register'%}">Register</a>
+                            </li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'login'%}">Login</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 search-footer-center">
+                    <form class="form-inline flex-search" action="{% url 'search' %}">
+                        <input class="form-control form-control-sm mr-3 w-75 footer-search" type="text" id="search" name="search" placeholder="Search" aria-label="Search">
+                        <button class="btn footer-icon" type="submit"> <i class="bi bi-search footer-icon " aria-hidden="true "></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-text ">
+                <p class="mb-md-0 ">© Copyright And Privacy Policy Reserved by <a class="footer-link-sernik-2" href="">SundayInk</a> <span id="monthYear" class="">March 2022</span>,
+                    <span class="below-small"> website designed by <a href="https://www.himanicc.com " target="_blank " rel="noopener noreferrer " class="footer-link-sernik" style="color: white; font-weight:600; ">www.himanicc.com</a></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <style>
+        .left-prev:hover {
+            background-color: black !important;
+            color: white;
+        }
+
+        .previous {
+            background-color: #d31124;
+            padding: 6px 8px;
+            text-decoration: none;
+            height: 35px;
+            color: white;
+        }
+
+        .previous:hover {
+            color: white;
+            background-color: black;
+            text-decoration: none;
+        }
+
+        .next-right {
+            background-color: #d31124;
+            padding: 8px 13px;
+            text-decoration: none;
+            height: 35px;
+            color: white;
+        }
+
+        .next-right:hover {
+            color: white;
+            background-color: black;
+            text-decoration: none;
+        }
+
+        .next-prev-btn {
+            display: flex;
+            align-items: center;
+        }
+
+        .round {
+            border-radius: 50%;
+        }
+
+        @media(max-width:552px) {
+            .previous {
+                width: max-content!important;
+                background-color: #f1f1f1!important;
+                color: black;
+                padding: 8px 13px;
+                font-size: 13px;
+                text-decoration: none;
+                height: 35px;
+            }
+            .next-right {
+                width: max-content!important;
+                background-color: #d31124;
+                padding: 8px 13px;
+                text-decoration: none;
+                height: 35px;
+                color: white;
+                font-size: 13px;
+            }
+        }
+    </style>
+    <!--  {% if prev %}-->
+    <!--  <a class="left-prev previous" href="{% url 'blog' prev.post_id%}">&laquo; Previous</a>-->
+    <!--  {% endif %}-->
+    <!--  {% if next %}-->
+    <!--  <a class="right-next next-right" href="{% url 'blog' next.post_id%}">Next &raquo;</a>-->
+    <!--  {% endif %}-->
+</body>
+
+
+{% endblock content %}

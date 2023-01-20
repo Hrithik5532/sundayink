@@ -1,0 +1,157 @@
+{% extends 'base.html' %} {% block title %}SundayInk || Contact {% endblock title %} {% block content %}
+
+
+
+
+<body>
+    <main class="contact-page">
+        <!-- Contact Paeg : Form Will Come First || -------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <div class="container">
+            <h2 class="oleez-page-title wow fadeInUp index-text">Get in Touch With Us</h2>
+            <div class="row">
+
+
+                <div class="col-md-6">
+                    <h5></h5>
+                    <div class="contact-cards">
+                        <div class="contact-block">
+                            <div class="row inner-c-block">
+                                <div class="col-md-2 contact-icon">
+                                    <i class="icons bi bi-geo-alt-fill"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <span style="font-family:myMontbold;"> Address :</span> <br>
+                                    <a class="contact-card-link mont" href="#">Sunday<span style="color: red;">Ink</span>, Swastik Building,18/6, R C Patel Road,  Chandavarkar Cr. Road No. 2,  next to ICICI Bank,  Above N M Medical diagnostic center,  Borivali (w) !! Mumbai -400 092</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact : Phone  -->
+                        <div class="contact-block">
+                            <div class="row inner-c-block">
+                                <div class="col-md-2 contact-icon">
+                                    <i class="icons bi bi-telephone-fill"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <span style="font-family:myMontbold;"> Telephone :</span> <br>
+                                    <a class="contact-card-link mont" href="tel:_919699710968"> +91-9699710968
+
+</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Contact Card : Email -->
+                        <div class="contact-block">
+                            <div class="row inner-c-block">
+                                <div class="col-md-2 contact-icon">
+                                    <i class=" icons bi bi-envelope-fill"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <span style="font-family:myMontSemibold;"> Mail  :</span> <br>
+                                    <a class="contact-card-link mont" href="email:shrenik@sundayink.in">shrenik@sundayink.in</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <style>
+                    .form-control{
+                        border: 1px solid #ced4da !important;
+                    }
+                </style>
+                <!-- Contact US From Code is placed here ||------------------------------------------------------------------------------------------------------------------------------ -->
+                <div class="col-md-6 pl-lg-5 wow fadeInRight contact-from-up">
+                    {% if form.errors %} {% for field in form %} {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %} {% endfor %} {% endif %}
+                    <form action="{% url 'contact'%}" method="POST" class="oleez-contact-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{form.name}}
+                        </div>
+                        <div class="form-group">
+                            {{form.email}}
+                        </div>
+                        <div class="form-group">
+                            {{form.phone}}
+                        </div>
+                        <div class="form-group">
+                            {{form.message}}
+                        </div>
+                        <button type="submit" class="btn defaul-btn">Send</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Map API is Placed Here ||  -->
+        <div class="wow fadeInLeft">
+            <div class="embed-responsive embed-responsive-1by1">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.146922737451!2d72.8512088147323!3d19.23242758699838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b0d78be5d887%3A0xef88b227406a327d!2sNM%20Medical%20Borivali!5e0!3m2!1sen!2sin!4v1648895242831!5m2!1sen!2sin"
+                width="100%" height="" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10759.495900110083!2d-122.34410726082857!3d47.609140133437705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906ab679235d7d%3A0xae763a82ab1fed6c!2sCentral%20Business%20District%2C%20Seattle%2C%20WA%2C%20USA!5e0!3m2!1sen!2sin!4v1587035152547!5m2!1sen!2sin"-->
+                <!--    width="100%" height="" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>-->
+            </div>
+        </div>
+    </main>
+
+
+
+
+    <!-- Footer Code has been placed here || --------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <footer class="page-footer font-small special-color-dark pt-4">
+
+        <div class="container">
+
+            <div class="row footer-content-2">
+                <div class="col-md-8 align-items-center">
+
+                    <div class="footer-widget-text">
+
+                        <ul class="footer-navigatoin">
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'about'%}">About</a></li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'blogs' %}">Blogs</a></li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'f&q'%}">FAQs</a>
+                            </li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'contact'%}">Contact</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'logout'%}">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'register'%}">Register</a>
+                            </li>
+                            <li class="Footer-list"> <a class="widget-content navigation-link" href="{% url 'login'%}">Login</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 search-footer-center">
+                    <form class="form-inline flex-search" action="{% url 'search' %}">
+                        <input class="form-control form-control-sm mr-3 w-75 footer-search" type="text" id="search" name="search" placeholder="Search" aria-label="Search">
+                        <button class="btn footer-icon" type="submit"> <i class="bi bi-search footer-icon " aria-hidden="true "></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-text ">
+                <p class="mb-md-0 ">© Copyright And Privacy Policy Reserved by <a class="footer-link-sernik-2" href="">SundayInk</a> <span id="monthYear" class="">March 2022</span>,
+                    <span class="below-small"> website designed by <a href="https://www.himanicc.com " target="_blank " rel="noopener noreferrer " class="footer-link-sernik" style="color: white; font-weight:600; ">www.himanicc.com</a></span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+{% endblock content %}

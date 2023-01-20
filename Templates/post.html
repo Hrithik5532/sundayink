@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% block title%} Add Post {% endblock title%} {% block content%}
+
+<body>
+
+    <style>
+        li a {
+            display: flex;
+            font-size: 16px;
+            color: black;
+        }
+
+        li a:hover {
+            color: red;
+        }
+
+        .section-edit {
+            width: 100%;
+            margin: 100px 0;
+            display: flex;
+        }
+         .rotate-screen{
+        display:none;
+    }
+ @media(max-width:700px){
+        .section-edit{
+            display:none !important;
+        }
+          .rotate-screen{
+            display:block;
+                width: max-content;
+                margin: auto;
+                padding: 54px;
+
+        }
+ }
+        </style>
+        <span class="rotate-screen col-md-10"><i class="bi bi-arrow-clockwise" style="font-size:16px;"></i>Rotate screen to portrait</span>
+
+    <div class="section-edit">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10">
+                    {% if user.is_authenticated %} {% if user.is_staff %}
+
+
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token%}
+
+                        <a style="font-size: normal;    font-weight: 700!important;">Writer Name:</a>{{form.writer_name}} <br>
+                        <a style="font-size: normal;    font-weight: 700!important;">Co-Author:</a>{{form.co_author}} <br>
+
+                        <a style="font-size: normal;font-weight: 700!important;">Add Category:</a>
+                        <li style="list-style: none;font-weight: 700!important; display: flex;">
+                            {{form.category}}
+                            <div class="col-md-3">
+                                <a href="{% url 'add_category'%}" class="defaul-btn-admin"></i>Add New Category</a>
+                            </div>
+
+                        </li>
+                        <br/>
+                        <a style="font-size: normal;font-weight: 700!important;">Title</a>:{{form.title}}
+                        <br/>
+                        <a style="font-size: normal;font-weight: 700!important;">Content:</a> <br><br>    {{form.content}}
+                        <br/>
+                        <br/>
+                        <a style="font-size: normal;font-weight: 700!important;">Post Date</a>{{form.post_date}}
+                        <br/>
+                        <br/>
+
+                        <a style="font-size: normal;font-weight: 700!important;">Tags</a>{{form.tags}}
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a style="font-size: normal;">Thumbnail</a>{{form.thumbnail}} {{form.media}} {% comment %} {{form.datepicker}} {{ form.as_p}} {% endcomment %}
+
+                            </div>
+                            <div class="col-md-6">
+                                <button class="defaul-btn-admin float-right">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% endif %} {% else %}
+                    <h3 style="text-align: center;"> User Access Denied </h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content%}
